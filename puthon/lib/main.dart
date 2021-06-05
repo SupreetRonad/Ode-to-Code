@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io' as Io;
 import 'dart:async';
 
+import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -33,26 +34,56 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Widget image;
+  var title = "Puthon - Validator";
 
   Future getImage() async {
-    final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
-    final bytes = await pickedFile.readAsBytes();
-    String img64 = base64Encode(bytes);
+    // final pickedFile =
+    //     await ImagePicker().getImage(source: ImageSource.gallery);
+    // final bytes = await pickedFile.readAsBytes();
+    // String img64 = base64Encode(bytes);
+
+    // setState(() {
+    //   if (pickedFile != null) {
+    //     if (kIsWeb) {
+    //       image = Image.network(pickedFile.path);
+    //     } else {
+    //       image = Image.file(Io.File(pickedFile.path));
+    //     }
+    //   } else {
+    //     print('No image selected.');
+    //   }
+    // });
+
+    // print(img64);
+
+    var url = Uri.parse('http://127.0.0.1:5000/gg');
+    final response = await http.get(url);
+
+    final decoded = json.decode(response.body) as Map<String, dynamic>;
 
     setState(() {
-      if (pickedFile != null) {
-        if (kIsWeb) {
-          image = Image.network(pickedFile.path);
-        } else {
-          image = Image.file(Io.File(pickedFile.path));
-        }
-      } else {
-        print('No image selected.');
-      }
+      title = decoded['greetings'];
     });
 
-    print(img64);
+    // var response = await http.post(
+    //   url,
+    //   headers: <String, String>{
+    //     'Content-Type': 'application/json; charset=UTF-8',
+    //     'Access-Control-Allow-Headers': 'Content-Type',
+    //     'Access-Control-Allow-Origin': 'http://localhost:51136/#/',
+    //     'Access-Control-Allow-Methods': 'POST'
+    //   },
+    //   body: jsonEncode(
+    //     <String, String>{'title': 'Lallalalal'},
+    //   ),
+    // );
+    // // print('Response status: ${response.statusCode}');
+    // // print('Response body: ${response.body}');
+
+    // // print(await http.read('https://example.com/foobar.txt'));
+
+    // print('laalallalallalaa################################');
+    
   }
 
   @override
@@ -65,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "Puthon - Validator",
+              title,
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: MediaQuery.of(context).size.shortestSide * .07,
