@@ -9,4 +9,4 @@ Hackathon June 2021
 
 ### Links
 - Link to Site : https://puthon-prescription-validator.anvil.app
-- Link to Collab : https://colab.research.google.com/drive/1Ke-0Qqzcmx2v8KDgf1p9SxxOVGpxgEkv#scrollTo=83qVT1gI8O-i
+- Link to Collab : https://colab.research.google.com/drive/1A7qTYeQg9bp9VNlwySLLpRj87V9BfLoH?usp=sharing#scrollTo=HfFDgfSEabZG
